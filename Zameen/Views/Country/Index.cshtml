@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Country>
+@{
+    ViewData["Title"] = "Countries";
+    Layout = "_Layout";
+}
+
+<h1 class="alert  alert-dark text-center">Countries</h1>
+
+<a asp-action="Create" asp-controller="Country" class="btn btn-outline-success mb-3"><i class="fas fa-flag"></i> Add New Country</a>
+
+<table id="tblCountry" class="table tblLoad table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Name)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => item.Name)</td>
+                <partial name="_TableButtonPartial" model="item.Id" />
+            </tr>
+        }
+    </tbody>
+</table>

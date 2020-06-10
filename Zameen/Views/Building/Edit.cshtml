@@ -1,0 +1,55 @@
+﻿@model Zameen.Models.ViewModels.BuildingViewModel
+@using Zameen.Extensions
+
+@{
+    ViewData["Title"] = "Update Building";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="alert alert-primary text-center">Update Building</h1>
+
+
+<div class="col-md-6 offset-md-3">
+    <div class="card border-success rounded shadow-lg p-3">
+        <div class="card-body">
+            <form method="post" asp-action="Edit">
+                <input type="hidden" asp-for="Building.Id" />
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Countries"></label>
+                    <select class="custom-select mb-2" asp-for="Building.CountryId" asp-items="Model.Countries.ToSelectListItem()"></select>
+                    <span class="text-danger" asp-validation-for="Building.CountryId"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Cities"></label>
+                    <select class="custom-select mb-2" asp-for="Building.CityId" asp-items="Model.Cities.ToSelectListItem()"></select>
+                    <span class="text-danger" asp-validation-for="Building.CityId"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Building.Name"></label>
+                    <textarea asp-for="Building.Name" class="form-control mb-2" placeholder="Enter Building Name"></textarea>
+                    <span class="text-danger" asp-validation-for="Building.Name"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Building.Address"></label>
+                    <input asp-for="Building.Address" class="form-control mb-2" placeholder="Enter Building Name" />
+                    <span class="text-danger" asp-validation-for="Building.Address"></span>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit"><i class="fas fa-building"></i> Update Building</button>
+                    <a asp-action="Index" asp-controller="Building" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

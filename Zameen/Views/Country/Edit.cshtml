@@ -1,0 +1,24 @@
+﻿@model Country
+@{
+    ViewData["Title"] = "Edit Country";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert  alert-primary text-center">Update Country</h1>
+
+<div class="col-md-6 offset-md-3">
+    <div class="card border-success rounded shadow-lg p-3">
+        <div class="card-body">
+            <form method="post" asp-action="Edit">
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Country Name" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit" asp-route-id="@Model.Id"><i class="fas fa-flag"></i> Update Country</button>
+                    <a asp-action="Index" asp-controller="Country" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

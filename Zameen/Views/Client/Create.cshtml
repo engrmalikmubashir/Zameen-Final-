@@ -1,0 +1,113 @@
+﻿@model Zameen.Models.ViewModels.ClientViewModel
+@using Zameen.Extensions
+
+@{
+    ViewData["Title"] = "Add New Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert alert-primary text-center">Add New Client</h1>
+
+
+<div class="col-md-6 offset-md-3">
+    <div class="card border-success rounded shadow-lg p-3">
+        <div class="card-body">
+            <form method="post" asp-action="Create">
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Countries"></label>
+                    <select class="custom-select mb-2 country" id="Country" asp-for="Client.CountryId" asp-items="Model.Countries.ToSelectListItem()"></select>
+                    <span class="text-danger" asp-validation-for="Client.CountryId"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Cities"></label>
+                    <select class="custom-select mb-2 city" id="City" asp-for="Client.CityId" asp-items="Model.Cities.ToSelectListItem()"></select>
+                    <span class="text-danger" asp-validation-for="Client.CityId"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Client.Name"></label>
+                    <input asp-for="Client.Name" class="form-control mb-2" placeholder="Enter Client Name" />
+                    <span class="text-danger" asp-validation-for="Client.Name"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Client.Email"></label>
+                    <input asp-for="Client.Email" class="form-control mb-2" placeholder="Enter Client Email" />
+                    <span class="text-danger" asp-validation-for="Client.Email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Client.Cnic"></label>
+                    <input asp-for="Client.Cnic" class="form-control mb-2" placeholder="Enter Client CNIC" />
+                    <span class="text-danger" asp-validation-for="Client.Cnic"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Client.Mobile"></label>
+                    <input asp-for="Client.Mobile" class="form-control mb-2" placeholder="Enter Client Mobile" />
+                    <span class="text-danger" asp-validation-for="Client.Mobile"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Client.Landline"></label>
+                    <input asp-for="Client.Landline" class="form-control mb-2" placeholder="Enter Client Landline" />
+                    <span class="text-danger" asp-validation-for="Client.Landline"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Client.Address"></label>
+                    <textarea asp-for="Client.Address" class="form-control mb-2" placeholder="Enter Client Address"></textarea>
+                    <span class="text-danger" asp-validation-for="Client.Address"></span>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit"><i class="fas fa-user-alt"></i> Add New Client</button>
+                    <a asp-action="Index" asp-controller="Client" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            var countryDdl = $(".country");
+            var cityDdl = $(".city");
+            cityDdl.prop('disabled', true);
+
+            countryDdl.change(function () {
+                if ($(this).val() == "0") {
+                    cityDdl.prop('disabled', true);
+                    cityDdl.val("0");
+                } else {
+                    cityDdl.prop('disabled', false);
+                    $.ajax({
+                        url: "/api/Cities/" + $(this).val(),
+                        method: "GET",
+                        success: function (data) {
+                            cityDdl.prop('disabled', false);
+                            cityDdl.empty();
+                            cityDdl.append($('<option/>', { value: '0', text: '-- Select City --' }));
+                            $(data).each(function (index, item) {
+                                cityDdl.append($('<option/>', { value: item.id, text: item.name }));
+                            });
+                        }
+                    });
+                }
+            });
+
+        });
+
+    </script>
+
+}

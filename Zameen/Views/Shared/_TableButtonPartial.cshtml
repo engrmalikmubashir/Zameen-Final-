@@ -1,0 +1,17 @@
+﻿@model int
+
+
+<td>
+    <div class="form-inline">
+        <a asp-action="Edit" asp-route-id="@Model" type="button" class="btn btn-sm btn-warning">
+            <i class="fa fa-pencil-alt"></i> Edit
+        </a>
+        &nbsp;|&nbsp;
+        <form asp-action="Delete" method="post">
+            <button onclick="if (!confirm('Are you sure you want to delete this record??')) { return false }"
+                    asp-action="Delete" asp-route-id="@Model" type="submit" class="btn btn-sm btn-danger">
+                <i class="fa fa-trash-alt"></i>&nbsp; Delete
+            </button>
+        </form>
+    </div>
+</td>

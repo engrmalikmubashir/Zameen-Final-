@@ -1,0 +1,30 @@
+﻿@model Country
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert  alert-danger text-center">Countries</h1>
+
+<div class="col-md-6 offset-md-3">
+    <div class="card border-success rounded shadow-lg p-3">
+        <div class="card-body">
+            <form method="post" asp-action="Create">
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control mb-2" placeholder="Enter Country Name" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit"><i class="fas fa-flag"></i> Add New Country</button>
+                    <a asp-action="Index" asp-controller="Country" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

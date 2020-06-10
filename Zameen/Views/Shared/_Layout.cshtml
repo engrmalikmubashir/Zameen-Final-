@@ -1,0 +1,94 @@
+﻿@using Zameen.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Zameen</title>
+    <link rel="stylesheet" href="" />
+    <!-- <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/lumen/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/all.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/custom.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Zameen</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Building" asp-action="Index">Building</a>
+                        </li>
+
+                        @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">Setup</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Country" asp-action="Index">Country</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="City" asp-action="Index">City</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Building" asp-action="Index">Building</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">Property</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Floor" asp-action="Index">Floor</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="Index">Shop</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Client" asp-action="Index">Client</a>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(Roles.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Add User</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-white bg-dark text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    &copy; @DateTime.Now.Year <b class="text-uppercase">Zameen</b> All rights reserved
+                </div>
+                <div class="col-6">
+                    Made with <i class="fas fa-heart text-danger"></i> by Engr Malik Mubashir
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script type="text/javascript" src="~/js/function.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

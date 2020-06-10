@@ -1,0 +1,38 @@
+﻿@model Zameen.Models.ViewModels.CityViewModel
+@using Zameen.Extensions
+
+@{
+    ViewData["Title"] = "Add New City";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h1 class="alert alert-primary text-center">Add New City</h1>
+
+<div class="col-md-6 offset-md-3">
+    <div class="card border-success rounded shadow-lg p-3">
+        <div class="card-body">
+            <form method="post" asp-action="Create">
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="Countries"></label>
+                    <select class="custom-select mb-2" asp-for="City.CountryId" asp-items="Model.Countries.ToSelectListItem()"></select>
+                    <span class="text-danger" asp-validation-for="City.CountryId"></span>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold" asp-for="City.Name"></label>
+                    <input asp-for="City.Name" class="form-control mb-2" placeholder="Enter City Name" />
+                    <span class="text-danger" asp-validation-for="City.Name"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit"><i class="fas fa-city"></i> Add New City</button>
+                    <a asp-action="Index" asp-controller="City" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
